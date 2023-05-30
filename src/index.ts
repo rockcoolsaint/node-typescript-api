@@ -5,6 +5,7 @@ import cors from 'cors';
 import http from 'http';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import router from './router';
 
 const app = express();
 
@@ -28,4 +29,6 @@ const MONGO_URI = process.env.MONGO_URL;
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URI);
-mongoose.connection.on('eror', (error: Error) => console.log(error))
+mongoose.connection.on('eror', (error: Error) => console.log(error));
+
+app.use('/', router())
